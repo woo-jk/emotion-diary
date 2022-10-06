@@ -33,7 +33,7 @@ const emotionList = [
     emotion_description: "끔찍함",
   },
 ];
-
+// 날짜를 문자열 형태(yyyy-mm-dd)로 바꾸는 함수
 const getStringDate = (date) => {
   return date.toISOString().slice(0, 10);
 };
@@ -48,16 +48,21 @@ const DiaryEditor = () => {
   const contentRef = useRef();
   const [content, setContent] = useState("");
 
+  // emotion 상태를 바꾸는 함수
   const handleClickEmotion = (emotion) => {
     setEmotion(emotion);
   };
 
+  // 작성완료 버튼을 누를 때 실행되는 함수
   const handleSubmit = () => {
+    // textarea에 값이 없다면 textarea를 focus
     if (content.length < 1) {
       contentRef.current.focus();
       return;
     }
+    // Context로 받은 onCreate 함수를 실행한다.
     onCreate(date, content, emotion);
+    // 뒤로가기로 못돌아오게 replace
     navigate("/", { replace: true });
   };
   return (

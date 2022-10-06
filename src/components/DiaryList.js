@@ -36,13 +36,16 @@ const DiaryList = ({ diaryList }) => {
   const [filter, setFilter] = useState("all");
 
   const getProcessedDiaryList = () => {
+    // 리스트 깊은복사
     const copyList = JSON.parse(JSON.stringify(diaryList));
+    // 필터 메뉴에 따른 필터링 과정
     const filteredList =
       filter === "all"
         ? copyList
         : copyList.filter((it) =>
             filter === "good" ? it.emotion <= 3 : it.emotion > 3
           );
+    // 정렬 메뉴에 따른 정렬 과정
     const sortedList = filteredList.sort((a, b) =>
       sortType === "lastest"
         ? Number(b.date) - Number(a.date)

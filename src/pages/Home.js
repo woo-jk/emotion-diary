@@ -26,11 +26,11 @@ const Home = () => {
       const lastDay = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth() + 1,
-        0
+        1
       ).getTime();
 
       setData(
-        diaryList.filter((it) => firstDay <= it.date && lastDay >= it.date)
+        diaryList.filter((it) => firstDay <= it.date && lastDay > it.date)
       );
     }
   }, [diaryList, currentDate]);

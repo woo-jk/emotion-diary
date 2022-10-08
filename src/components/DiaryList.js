@@ -4,7 +4,7 @@ import DiaryItem from "./DiaryItem";
 import MyButton from "./MyButton";
 
 const sortOptionList = [
-  { value: "lastest", name: "최신순" },
+  { value: "latest", name: "최신순" },
   { value: "oldest", name: "오래된 순" },
 ];
 
@@ -32,7 +32,7 @@ const ControlMenu = ({ value, onChange, optionList }) => {
 
 const DiaryList = ({ diaryList }) => {
   const navigate = useNavigate();
-  const [sortType, setSortType] = useState("lastest");
+  const [sortType, setSortType] = useState("latest");
   const [filter, setFilter] = useState("all");
 
   const getProcessedDiaryList = () => {
@@ -47,7 +47,7 @@ const DiaryList = ({ diaryList }) => {
           );
     // 정렬 메뉴에 따른 정렬 과정
     const sortedList = filteredList.sort((a, b) =>
-      sortType === "lastest"
+      sortType === "latest"
         ? Number(b.date) - Number(a.date)
         : Number(a.date) - Number(b.date)
     );

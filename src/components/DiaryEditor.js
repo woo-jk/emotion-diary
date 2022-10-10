@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatchContext } from "../App";
 import EmotionItem from "./EmotionItem";
@@ -20,9 +20,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const [content, setContent] = useState("");
 
   // emotion 상태를 바꾸는 함수
-  const handleClickEmotion = (emotion) => {
+  const handleClickEmotion = useCallback((emotion) => {
     setEmotion(emotion);
-  };
+  }, []);
 
   // 작성완료 버튼을 누를 때 실행되는 함수
   const handleSubmit = () => {

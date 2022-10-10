@@ -34,6 +34,7 @@ const reducer = (state, action) => {
       return state;
     }
   }
+  // 로컬스토리지에 저장
   localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 };
@@ -43,13 +44,19 @@ export const DiaryDispatchContext = React.createContext();
 
 function App() {
   useEffect(() => {
+    // 기존에 저장되어 있는 데이터를 가져옴
     const localData = localStorage.getItem("diary");
     if (localData) {
+      // 데이터를 id 순으로 내림차순 정렬
       const diaryList = JSON.parse(localData).sort(
         (a, b) => parseInt(b.id) - parseInt(a.id)
       );
-      dataId.current = parseInt(diaryList[0].id) + 1;
-      dispatch({ type: "INIT", data: diaryList });
+      if (diaryList.length >= 1) {
+        // id가 가장 큰 0번 인덱스에 +1 한 값을 dataId에 저장함
+        dataId.current = parseInt(diaryList[0].id) + 1;
+        // 불러온 데이터를 적용
+        dispatch({ type: "INIT", data: diaryList });
+      }
     }
   }, []);
   const [data, dispatch] = useReducer(reducer, []);
